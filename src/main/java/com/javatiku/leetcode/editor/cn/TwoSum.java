@@ -22,34 +22,53 @@ import java.util.Map;
 public class TwoSum {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] result = solution.twoSum(new int[] {2, 7, 11, 15}, 9);
+        Solution solution = new TwoSum().new Solution();
+        int[] result = solution.twoSum(new int[]{2, 7, 11, 15}, 9);
         assert result[0] == 0;
         assert result[1] == 1;
     }
 
-}
-
-// leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>(16);
-        if (nums == null) {
-            return new int[2];
-        }
-        for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i], i);
-        }
-        int temp;
-        for (int i = 0; i < nums.length; i++) {
-            temp = target;
-            int j = temp - nums[i];
-            Integer x = map.get(j);
-            if (x != null) {
-                return new int[] {i, x};
+    // leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] twoSum(int[] nums, int target) {
+            if (nums == null) {
+                throw new IllegalArgumentException("There are no two number");
             }
+            Map<Integer, Integer> map = new HashMap<>(16);
+            int temp;
+            for (int i = 0; i < nums.length; i++) {
+                temp = target;
+                int j = temp - nums[i];
+                Integer x = map.get(j);
+                if (x != null && x != i) {
+                    return new int[]{i, x};
+                }
+                map.put(nums[i], i);
+            }
+            throw new IllegalArgumentException("There are no two number");
         }
-        return new int[] {0, 0};
+    }
+    // leetcode submit region end(Prohibit modification and deletion)
+
+    class Solution1 {
+        public int[] twoSum(int[] nums, int target) {
+            Map<Integer, Integer> map = new HashMap<>(16);
+            if (nums == null) {
+                return new int[2];
+            }
+            for (int i = 0; i < nums.length; i++) {
+                map.put(nums[i], i);
+            }
+            int temp;
+            for (int i = 0; i < nums.length; i++) {
+                temp = target;
+                int j = temp - nums[i];
+                Integer x = map.get(j);
+                if (x != null && x != i) {
+                    return new int[]{i, x};
+                }
+            }
+            return new int[]{0, 0};
+        }
     }
 }
-// leetcode submit region end(Prohibit modification and deletion)
