@@ -1,43 +1,42 @@
-//给定一组非负整数 nums，重新排列它们每位数字的顺序使之组成一个最大的整数。 
+// 给定一组非负整数 nums，重新排列它们每位数字的顺序使之组成一个最大的整数。
 //
-// 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。 
+// 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
 //
-// 
 //
-// 示例 1： 
+//
+// 示例 1：
 //
 // 输入：nums = [10,2]
-//输出："210" 
+// 输出："210"
 //
-// 示例 2： 
+// 示例 2：
 //
 // 输入：nums = [3,30,34,5,9]
-//输出："9534330"
-// 
+// 输出："9534330"
 //
-// 示例 3： 
+//
+// 示例 3：
 //
 // 输入：nums = [1]
-//输出："1"
-// 
+// 输出："1"
 //
-// 示例 4： 
+//
+// 示例 4：
 //
 // 输入：nums = [10]
-//输出："10"
-// 
+// 输出："10"
 //
-// 
 //
-// 提示： 
 //
-// 
-// 1 <= nums.length <= 100 
-// 0 <= nums[i] <= 109 
-// 
-// Related Topics 排序 
+//
+// 提示：
+//
+//
+// 1 <= nums.length <= 100
+// 0 <= nums[i] <= 109
+//
+// Related Topics 排序
 // 👍 410 👎 0
-
 
 package com.javatiku.leetcode.editor.cn;
 
@@ -49,20 +48,17 @@ import java.util.stream.Stream;
 public class LargestNumber {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution solution = new LargestNumber().new Solution();
     }
 
     /**
      * 最大堆
      */
-    //leetcode submit region begin(Prohibit modification and deletion)
-    static class Solution {
+    // leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
         public String largestNumber(int[] nums) {
             if (nums == null) {
                 return "";
-            }
-            if (Arrays.stream(nums).allMatch(x -> x == 0)) {
-                return "0";
             }
             Comparator<String> comparator = (o1, o2) -> {
                 String o1o2 = o1 + o2;
@@ -71,10 +67,17 @@ public class LargestNumber {
             };
             PriorityQueue<String> queue = new PriorityQueue<>(comparator);
             Arrays.stream(nums).boxed().map(Object::toString).forEach(queue::add);
-            queue.
+            if (queue.peek().equals("0")) {
+                return "0";
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            while (!queue.isEmpty()) {
+                stringBuilder.append(queue.poll());
+            }
+            return stringBuilder.toString();
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
+    // leetcode submit region end(Prohibit modification and deletion)
 
     /**
      * Arrays.sort排序
