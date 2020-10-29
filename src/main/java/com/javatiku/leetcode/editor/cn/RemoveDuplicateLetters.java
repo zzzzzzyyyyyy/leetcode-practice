@@ -32,16 +32,16 @@
 
 package com.javatiku.leetcode.editor.cn;
 
-import java.util.Arrays;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.HashSet;
+import java.util.Objects;
 
 public class RemoveDuplicateLetters {
 
     public static void main(String[] args) {
         Solution solution = new RemoveDuplicateLetters().new Solution();
-        
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -51,33 +51,24 @@ public class RemoveDuplicateLetters {
                 return "";
             }
 
-            char[] result = new char[s.length()];
-            Arrays.fill(result, '0');
-            Map<Character, Integer> map = new HashMap<>();
-            int previous = s.length() - 1;
-            for (int i = s.length() - 1; i >= 0; i--) {
+            HashSet<Character> seen = new HashSet<>();
+            HashMap<Character, Integer> lastOccurrence = new HashMap<>();
+            for (int i = 0; i < s.length(); i++) {
+                lastOccurrence.put(s.charAt(i), i);
+            }
+
+            Deque<Character> stack = new ArrayDeque<>();
+            for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
-                if (!map.containsKey(c)) {
-                    map.put(c, i);
-                    result[i] = c;
-                    previous = i;
-                    continue;
-                }
-                if (c < s.charAt(previous)) {
-                    result[map.get(c)] ='0';
-                    result[i] = c;
-                    previous = i;
-                    map.put(c, i);
+                if (!seen.contains(c)) {
+                    while (!stack.isEmpty() && stack.peekLast() > c && lastOccurrence.get(stack.peekLast()) > i) {
+                        seen.remove(stack.pollLast());
+                    }
+                    seen.add(c);
+                    stack.add(c);
                 }
             }
-            StringBuilder stringBuilder = new StringBuilder();
-            for (char c : result) {
-                if (c == '0') {
-                    continue;
-                }
-                stringBuilder.append(c);
-            }
-            return stringBuilder.toString();
+            return stack.stream().map(Objects::toString).reduce((x, y) -> x + y).orElse("");
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
