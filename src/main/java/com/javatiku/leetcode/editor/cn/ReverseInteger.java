@@ -36,6 +36,25 @@ public class ReverseInteger {
     // leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int reverse(int x) {
+            int result = 0;
+            while (x != 0) {
+                int reminder = x % 10;
+                x = x / 10;
+                if (result > 0 && result > (Integer.MAX_VALUE - reminder) / 10) {
+                    return 0;
+                }
+                if (result < 0 && result < (Integer.MIN_VALUE - reminder) / 10) {
+                    return 0;
+                }
+                result = result * 10 + reminder;
+            }
+            return result;
+        }
+    }
+    // leetcode submit region end(Prohibit modification and deletion)
+
+    static class Solution2 {
+        public int reverse(int x) {
             String s = Integer.toString(x);
             char[] result = new char[s.length()];
             int left = 0;
@@ -62,6 +81,4 @@ public class ReverseInteger {
             return Integer.parseInt(reversedNum);
         }
     }
-    // leetcode submit region end(Prohibit modification and deletion)
-
 }
