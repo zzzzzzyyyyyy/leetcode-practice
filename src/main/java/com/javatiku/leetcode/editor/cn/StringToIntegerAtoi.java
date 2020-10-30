@@ -73,7 +73,26 @@ public class StringToIntegerAtoi {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int myAtoi(String s) {
+            int result = 0;
+            int i = 0;
+            int j = s.length() - 1;
+            while (i < j) {
+                if (s.charAt(i) == ' ') {
+                    i++;
+                } else if (invalidCharacter(s.charAt(i))) {
+                    return 0;
+                } else {
+                    break;
+                }
+            }
+            while (i < j) {
 
+            }
+            return result;
+        }
+
+        private boolean invalidCharacter(char c) {
+            return (c < '0' || c > '9') && c != '-' && c != '+';
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
