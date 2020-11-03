@@ -67,32 +67,44 @@ public class StringToIntegerAtoi {
 
     public static void main(String[] args) {
         Solution solution = new StringToIntegerAtoi().new Solution();
-        
+        String s = " ";
+        System.out.println(solution.myAtoi(s));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int myAtoi(String s) {
+            if (s == null || s.length() == 0) {
+                return 0;
+            }
             int result = 0;
             int i = 0;
             int j = s.length() - 1;
-            while (i < j) {
-                if (s.charAt(i) == ' ') {
-                    i++;
-                } else if (invalidCharacter(s.charAt(i))) {
-                    return 0;
-                } else {
+            while (i <= j && s.charAt(i) == ' ') {
+                i++;
+            }
+            int flag = 1;
+            if (i <= j && s.charAt(i) == '+') {
+                i++;
+                flag = 1;
+            } else if (i <= j && s.charAt(i) == '-') {
+                i++;
+                flag = -1;
+            }
+            while (i <= j) {
+                char c = s.charAt(i++);
+                if (c < '0' || c > '9') {
                     break;
                 }
-            }
-            while (i < j) {
-
+                if (flag > 0 && (Integer.MAX_VALUE / 10 > result || (Integer.MAX_VALUE / 10 == result && (c - '0') < 7))) {
+                    result = result * 10 + flag * (c - '0');
+                } else if (flag < 0 && (Integer.MIN_VALUE / 10 < result || (Integer.MIN_VALUE / 10 == result && (c - '0') < 8))) {
+                    result = result * 10 + flag * (c - '0');
+                } else {
+                    return flag > 0 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+                }
             }
             return result;
-        }
-
-        private boolean invalidCharacter(char c) {
-            return (c < '0' || c > '9') && c != '-' && c != '+';
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
