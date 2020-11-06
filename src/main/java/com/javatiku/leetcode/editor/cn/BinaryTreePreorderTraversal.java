@@ -78,7 +78,6 @@ public class BinaryTreePreorderTraversal {
 
             System.out.print(out);
         }
-
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
