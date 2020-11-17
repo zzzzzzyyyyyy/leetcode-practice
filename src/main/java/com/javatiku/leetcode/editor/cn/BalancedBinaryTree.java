@@ -42,13 +42,6 @@
 
 package com.javatiku.leetcode.editor.cn;
 
-import sun.reflect.generics.tree.Tree;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-
 public class BalancedBinaryTree {
 
     public static void main(String[] args) {

@@ -27,7 +27,8 @@ public class ConvertSortedArrayToBinarySearchTree {
 
     // leetcode submit region begin(Prohibit modification and deletion)
     /**
-     * 利用数组升序的特点 二叉搜索树的特点是：中序遍历结果为升序 所以可以采用二分法来构造平衡二叉搜索树 里用二分法，左右两边的结点数最多只会差1，再保证左右两边分别是平衡二叉搜索树，就可以保证整棵树是平衡的。
+     * 利用数组升序的特点 二叉搜索树的特点是：中序遍历结果为升序
+     * 所以可以采用二分法来构造平衡二叉搜索树 里用二分法，左右两边的结点数最多只会差1，再保证左右两边分别是平衡二叉搜索树，就可以保证整棵树是平衡的。
      */
     class Solution {
         public TreeNode sortedArrayToBST(int[] nums) {
