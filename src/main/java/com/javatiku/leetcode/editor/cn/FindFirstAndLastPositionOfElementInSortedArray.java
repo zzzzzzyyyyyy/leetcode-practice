@@ -25,7 +25,6 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
-
     /**
      * 二分法
      */
